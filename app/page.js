@@ -127,9 +127,6 @@ export default function NewsletterLanding() {
           {/* Trust Indicators */}
           <div className="space-y-4 text-gray-600">
             <p className="flex items-center justify-center gap-2 text-sm">
-              <span className="text-xl">🇬🇧</span>
-              <span className="text-xl">🇪🇺</span>
-              <span className="text-xl">🇺🇸</span>
               <span>Join 2,847 UK, European & US professionals, investors & strategic relocators</span>
             </p>
             

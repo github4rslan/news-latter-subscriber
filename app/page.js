@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { CheckCircle } from 'lucide-react'
+import { CheckCircle, Mail } from 'lucide-react'
 
 export default function NewsletterLanding() {
   const [formData, setFormData] = useState({
@@ -58,15 +58,15 @@ export default function NewsletterLanding() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-8">
       <div className="max-w-2xl w-full">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-5 sm:mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
             Saudi Arabia in 5 Minutes a Day
           </h1>
           
-          <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-7 sm:mb-8">
+          <p className="text-lg text-gray-600 leading-relaxed mb-8">
             Your gateway to Vision 2030—property, careers, lifestyle, and opportunities. 
             No fluff. No noise. Just the signals that matter.
           </p>
@@ -91,44 +91,42 @@ export default function NewsletterLanding() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto mb-8 space-y-4">
-            {/* Email Input - Simple */}
+          {/* Email Input - Simple */}
+          <div className="max-w-md mx-auto mb-6">
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
               placeholder="your.email@company.com"
-              autoComplete="email"
-              inputMode="email"
               disabled={loading}
-              className="w-full px-5 sm:px-6 py-4 border-2 border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-900 transition-all disabled:bg-gray-50 disabled:cursor-not-allowed text-center text-base"
+              className="w-full px-6 py-4 border-2 border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-900 transition-all disabled:bg-gray-50 disabled:cursor-not-allowed text-center"
               required
             />
+          </div>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-4 px-8 bg-black hover:bg-gray-800 text-white font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-base"
-            >
-              {loading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                  </svg>
-                  Joining...
-                </span>
-              ) : (
-                'Join for Free'
-              )}
-            </button>
-          </form>
+          {/* Submit Button */}
+          <button
+            onClick={handleSubmit}
+            disabled={loading}
+            className="w-full max-w-md mx-auto block py-4 px-8 bg-black hover:bg-gray-800 text-white font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed mb-8"
+          >
+            {loading ? (
+              <span className="flex items-center justify-center gap-2">
+                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                </svg>
+                Joining...
+              </span>
+            ) : (
+              'Join for Free'
+            )}
+          </button>
 
           {/* Trust Indicators */}
           <div className="space-y-4 text-gray-600">
-            <p className="flex flex-wrap items-center justify-center gap-2 text-sm text-center">
+            <p className="flex items-center justify-center gap-2 text-sm">
               <span>Join 2,847 UK, European & US professionals, investors & strategic relocators</span>
             </p>
             

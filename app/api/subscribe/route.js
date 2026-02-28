@@ -12,27 +12,19 @@ export async function POST(request) {
       )
     }
 
-    // Get Brevo credentials from environment variables
-    const BREVO_API_KEY = process.env.BREVO_API_KEY
-    const BREVO_LIST_ID = Number.parseInt(process.env.BREVO_LIST_ID, 10)
-    const BREVO_SENDER_NAME = process.env.BREVO_SENDER_NAME || 'The Kingdom Brief'
+    const BREVO_API_KEY     = process.env.BREVO_API_KEY
+    const BREVO_LIST_ID     = Number.parseInt(process.env.BREVO_LIST_ID, 10)
+    const BREVO_SENDER_NAME  = process.env.BREVO_SENDER_NAME || 'The Kingdom Brief'
     const BREVO_SENDER_EMAIL = process.env.BREVO_SENDER_EMAIL
-    const BREVO_REPLY_TO = process.env.BREVO_REPLY_TO || BREVO_SENDER_EMAIL
+    const BREVO_REPLY_TO    = process.env.BREVO_REPLY_TO || BREVO_SENDER_EMAIL
 
     if (!BREVO_API_KEY) {
       console.error('Brevo API key not configured')
-      return NextResponse.json(
-        { error: 'Server configuration error' },
-        { status: 500 }
-      )
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
     }
-
     if (!Number.isFinite(BREVO_LIST_ID)) {
       console.error('Brevo list ID not configured or invalid')
-      return NextResponse.json(
-        { error: 'Server configuration error' },
-        { status: 500 }
-      )
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
     }
 
     console.log('Attempting to subscribe:', email)
@@ -48,86 +40,251 @@ export async function POST(request) {
       },
       body: JSON.stringify({
         email: email.toLowerCase(),
-        attributes: {
-          FIRSTNAME: firstName || '',
-          LASTNAME: lastName || ''
-        },
+        attributes: { FIRSTNAME: firstName || '', LASTNAME: lastName || '' },
         listIds: [BREVO_LIST_ID],
         updateEnabled: true
       })
     })
 
     console.log('Brevo response status:', response.status)
-
     const responseText = await response.text()
     console.log('Brevo response:', responseText)
 
     let data = {}
     if (responseText) {
-      try {
-        data = JSON.parse(responseText)
-      } catch (e) {
-        console.error('Failed to parse response:', responseText)
-        throw new Error('Invalid response from email service')
-      }
+      try { data = JSON.parse(responseText) }
+      catch (e) { throw new Error('Invalid response from email service') }
     }
 
     if (!response.ok) {
       if (response.status === 400 && data.code === 'duplicate_parameter') {
-        return NextResponse.json(
-          { error: 'This email is already subscribed' },
-          { status: 400 }
-        )
+        return NextResponse.json({ error: 'This email is already subscribed' }, { status: 400 })
       }
       if (response.status === 401) {
-        console.error('Invalid Brevo API key')
-        return NextResponse.json(
-          { error: 'Server configuration error - Invalid API key' },
-          { status: 500 }
-        )
+        return NextResponse.json({ error: 'Server configuration error - Invalid API key' }, { status: 500 })
       }
       throw new Error(data.message || `Brevo API error: ${response.status}`)
     }
 
-    // ── STEP 2: Send welcome email via Brevo API ───────────────
+    // ── STEP 2: Send welcome email ──────────────────────────────
     const firstNameSafe = (firstName || '').trim()
-    const greetingName = firstNameSafe || 'there'
+    const greetingName  = firstNameSafe || 'there'
 
-    const welcomeHtml = `
-      <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111;">
-        <p>Hi ${greetingName},</p>
-        <p>Thanks for subscribing to <strong>The Kingdom Brief</strong>. You are in.</p>
-        <p>
-          Starting now, you will get a weekly briefing on Saudi Arabia — property, careers,
-          lifestyle, and the opportunities that actually matter. No fluff, no noise.
-        </p>
-        <p><strong>What to expect:</strong></p>
-        <ul>
-          <li>The signal, not the hype</li>
-          <li>Clear, actionable insights</li>
-          <li>Quick reads you can finish in minutes</li>
-        </ul>
-        <p>As a bonus, you will receive your Personalized Saudi Arabia Opportunity Map shortly.</p>
-        <p>If you ever want to share feedback, just reply to this email.</p>
-        <p>Welcome aboard,<br /><strong>The Kingdom Brief</strong></p>
-      </div>
-    `
+    const welcomeHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Welcome to The Kingdom Brief</title>
+  <style>
+    @media only screen and (max-width: 640px) {
+      .email-container { width: 100% !important; }
+      .email-body { padding: 24px 20px !important; }
+      .email-header { padding: 28px 20px !important; }
+      .logo { font-size: 30px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#F5EDD6;font-family:Arial,sans-serif;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#F5EDD6;">
+  <tr>
+    <td align="center" style="padding:30px 10px;">
+      <table class="email-container" border="0" cellpadding="0" cellspacing="0" width="600"
+             style="background-color:#FFFDF7;border-radius:4px;overflow:hidden;
+                    box-shadow:0 4px 24px rgba(0,0,0,0.12);">
+
+        <!-- HEADER -->
+        <tr>
+          <td class="email-header" align="center"
+              style="background-color:#1A1208;padding:40px 40px 32px 40px;">
+            <table border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td align="center"
+                    style="background-color:rgba(201,168,76,0.15);border:1px solid #C9A84C;
+                           border-radius:2px;padding:5px 14px;">
+                  <span style="font-size:10px;font-weight:bold;color:#E8C97A;
+                               letter-spacing:3px;text-transform:uppercase;">✦ YOU'RE IN</span>
+                </td>
+              </tr>
+            </table>
+            <br/>
+            <div class="logo"
+                 style="font-family:Georgia,serif;font-size:42px;font-weight:bold;
+                        color:#FFFDF7;line-height:1;letter-spacing:-1px;margin:12px 0 6px 0;">
+              The Kingdom <span style="color:#C9A84C;">Brief</span>
+            </div>
+            <div style="font-size:11px;color:rgba(255,253,247,0.5);letter-spacing:2px;
+                        text-transform:uppercase;margin-bottom:24px;">
+              Your Weekly Saudi Arabia Digest
+            </div>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td style="background-color:rgba(201,168,76,0.12);
+                           border:1px solid rgba(201,168,76,0.35);
+                           border-radius:3px;padding:16px 22px;">
+                  <p style="font-family:Georgia,serif;font-size:16px;font-style:italic;
+                            color:#E8C97A;line-height:1.6;margin:0;text-align:center;">
+                    "You just made a smart move, ${greetingName}."
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- GREEN WELCOME BAND -->
+        <tr>
+          <td align="center" style="background-color:#1B4332;padding:28px 40px;">
+            <p style="font-family:Georgia,serif;font-size:20px;color:#FFFDF7;
+                      margin:0 0 10px 0;text-align:center;">
+              Welcome aboard! 👋
+            </p>
+            <p style="font-size:13px;color:rgba(255,253,247,0.75);line-height:1.75;
+                      margin:0;text-align:center;">
+              Every Friday at 8am GMT, The Kingdom Brief lands in your inbox.
+              5 minutes. Everything that matters in Saudi Arabia. Nothing that doesn't.
+            </p>
+          </td>
+        </tr>
+
+        <!-- BODY -->
+        <tr>
+          <td class="email-body" style="padding:36px 40px;background-color:#FFFDF7;">
+
+            <p style="font-size:14px;color:#3D3530;line-height:1.8;margin:0 0 16px 0;">
+              Real estate. Careers. Business opportunities. Lifestyle. The moves
+              investors are making <strong>before everyone else catches on.</strong>
+            </p>
+            <p style="font-size:14px;color:#3D3530;line-height:1.8;margin:0 0 24px 0;">
+              No fluff. No politics. <strong>Just the signal.</strong>
+            </p>
+
+            <!-- What's coming timeline -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                   style="margin-bottom:24px;background-color:#1A1208;border-radius:3px;">
+              <tr>
+                <td style="padding:20px 24px;">
+                  <p style="font-size:10px;font-weight:bold;color:#C9A84C;letter-spacing:2px;
+                            text-transform:uppercase;margin:0 0 16px 0;">
+                    📬 What's coming your way:
+                  </p>
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                      <td style="padding:8px 0;border-bottom:1px solid rgba(255,253,247,0.08);">
+                        <span style="font-size:12px;color:#C9A84C;font-weight:bold;">Day 2</span>
+                        &nbsp;&nbsp;
+                        <span style="font-size:13px;color:rgba(255,253,247,0.8);">
+                          The 3 Saudi myths costing people money
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding:8px 0;border-bottom:1px solid rgba(255,253,247,0.08);">
+                        <span style="font-size:12px;color:#C9A84C;font-weight:bold;">Day 4</span>
+                        &nbsp;&nbsp;
+                        <span style="font-size:13px;color:rgba(255,253,247,0.8);">
+                          What our readers are actually asking this week
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding:8px 0;border-bottom:1px solid rgba(255,253,247,0.08);">
+                        <span style="font-size:12px;color:#C9A84C;font-weight:bold;">Day 6</span>
+                        &nbsp;&nbsp;
+                        <span style="font-size:13px;color:rgba(255,253,247,0.8);">
+                          Your first brief drops tomorrow — preview inside
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding:8px 0;">
+                        <span style="font-size:12px;color:#C9A84C;font-weight:bold;">Every Friday</span>
+                        &nbsp;&nbsp;
+                        <span style="font-size:13px;color:rgba(255,253,247,0.8);">
+                          The full Kingdom Brief — 8am GMT 🇸🇦
+                        </span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+
+            <!-- WhatsApp nudge -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                   style="margin-bottom:24px;border:1px solid #E8D9B5;
+                          border-left:4px solid #C9A84C;border-radius:3px;">
+              <tr>
+                <td style="padding:16px 20px;">
+                  <p style="font-size:12px;font-weight:bold;color:#8B6914;
+                            margin:0 0 6px 0;letter-spacing:0.5px;">
+                    📱 SIGNED UP FOR WHATSAPP ALERTS?
+                  </p>
+                  <p style="font-size:13px;color:#3D3530;line-height:1.7;margin:0;">
+                    Reply <strong>START</strong> to the WhatsApp message you just received
+                    to confirm your breaking Saudi news alerts.
+                  </p>
+                </td>
+              </tr>
+            </table>
+
+            <p style="font-size:14px;color:#3D3530;line-height:1.8;margin:0 0 6px 0;">
+              Questions? Just reply to this email — I read every one.
+            </p>
+
+            <!-- Sign off -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                   style="margin-top:28px;padding-top:20px;
+                          border-top:1px solid #E8D9B5;">
+              <tr>
+                <td>
+                  <p style="font-size:14px;color:#3D3530;margin:0 0 4px 0;">
+                    Welcome aboard,
+                  </p>
+                  <p style="font-family:Georgia,serif;font-size:20px;
+                            font-weight:bold;color:#1A1208;margin:0;">
+                    The Kingdom Brief
+                  </p>
+                </td>
+              </tr>
+            </table>
+
+          </td>
+        </tr>
+
+        <!-- FOOTER -->
+        <tr>
+          <td align="center" style="background-color:#1A1208;padding:20px 40px;">
+            <p style="font-size:11px;color:rgba(255,253,247,0.3);
+                      line-height:1.8;margin:0;text-align:center;">
+              The Kingdom Brief &nbsp;·&nbsp; Weekly Newsletter<br/>
+              You're receiving this because you subscribed to The Kingdom Brief.
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>`
 
     const welcomeText = [
-      `Hi ${greetingName},`,
+      `You're in, ${greetingName}. Welcome to The Kingdom Brief.`,
       '',
-      'Thanks for subscribing to The Kingdom Brief. You are in.',
+      'Every Friday at 8am GMT, The Kingdom Brief lands in your inbox.',
+      '5 minutes. Everything that matters in Saudi Arabia. Nothing that doesn\'t.',
       '',
-      'Starting now, you will get a weekly briefing on Saudi Arabia — property, careers, lifestyle, and the opportunities that actually matter. No fluff, no noise.',
+      'Here\'s what\'s coming your way:',
+      '- Day 2:        The 3 Saudi myths costing people money',
+      '- Day 4:        What our readers are actually asking this week',
+      '- Day 6:        Your first brief drops tomorrow — preview inside',
+      '- Every Friday: The full Kingdom Brief at 8am GMT',
       '',
-      'What to expect:',
-      '- The signal, not the hype',
-      '- Clear, actionable insights',
-      '- Quick reads you can finish in minutes',
+      'Also signed up for WhatsApp? Reply START to confirm your alerts.',
       '',
-      'As a bonus, you will receive your Personalized Saudi Arabia Opportunity Map shortly.',
-      '',
-      'If you ever want to share feedback, just reply to this email.',
+      'Questions? Just reply to this email — I read every one.',
       '',
       'Welcome aboard,',
       'The Kingdom Brief'
@@ -142,21 +299,10 @@ export async function POST(request) {
           'content-type': 'application/json'
         },
         body: JSON.stringify({
-          sender: {
-            name: BREVO_SENDER_NAME,
-            email: BREVO_SENDER_EMAIL
-          },
-          to: [
-            {
-              email: email.toLowerCase(),
-              name: firstNameSafe || email
-            }
-          ],
-          replyTo: {
-            email: BREVO_REPLY_TO,
-            name: BREVO_SENDER_NAME
-          },
-          subject: 'Welcome to The Kingdom Brief — your weekly Saudi Arabia briefing',
+          sender:  { name: BREVO_SENDER_NAME, email: BREVO_SENDER_EMAIL },
+          to:      [{ email: email.toLowerCase(), name: firstNameSafe || email }],
+          replyTo: { email: BREVO_REPLY_TO, name: BREVO_SENDER_NAME },
+          subject: `You're in, ${greetingName}. Welcome to The Kingdom Brief 🇸🇦`,
           htmlContent: welcomeHtml,
           textContent: welcomeText
         })
@@ -172,10 +318,7 @@ export async function POST(request) {
       console.error('Welcome email error:', emailError)
     }
 
-    return NextResponse.json({ 
-      success: true, 
-      message: 'Successfully subscribed!' 
-    }, { status: 201 })
+    return NextResponse.json({ success: true, message: 'Successfully subscribed!' }, { status: 201 })
 
   } catch (error) {
     console.error('Subscribe error:', error)

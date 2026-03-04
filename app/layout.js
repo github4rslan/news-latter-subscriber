@@ -4,8 +4,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Saudi Business Newsletter - Subscribe Free',
-  description: 'Your 7am business briefing on all things Saudi. Daily insights on real estate, business, and market updates.',
+  title: 'The Saudi Entry Strategy — Weekly Briefing',
+  description: 'Vision 2030 is rewriting the rules. Every Thursday, get the one opportunity worth acting on — distilled to 5 minutes, zero noise.',
 }
 
 export default function RootLayout({ children }) {

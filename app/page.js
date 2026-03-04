@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { CheckCircle, Mail } from 'lucide-react'
+import { CheckCircle } from 'lucide-react'
 
 export default function NewsletterLanding() {
   const [formData, setFormData] = useState({
@@ -15,7 +15,7 @@ export default function NewsletterLanding() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
+
     if (!formData.email || !formData.email.includes('@')) {
       setError('Please enter a valid email address')
       return
@@ -41,7 +41,7 @@ export default function NewsletterLanding() {
 
       setSuccess(true)
       setFormData({ firstName: '', lastName: '', email: '' })
-      
+
       setTimeout(() => setSuccess(false), 5000)
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.')
@@ -58,27 +58,35 @@ export default function NewsletterLanding() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-8">
-      <div className="max-w-2xl w-full">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-            Saudi Arabia in 5 Minutes a Day
+    <div className="min-h-screen flex flex-col">
+      {/* HERO SECTION */}
+      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 py-12 sm:py-16">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+        />
+        {/* Dark Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
+
+        {/* Content */}
+        <div className="relative z-10 max-w-2xl w-full text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight tracking-tight">
+            The Saudi Entry Strategy
           </h1>
-          
-          <p className="text-lg text-gray-600 leading-relaxed mb-8">
-            Your gateway to Vision 2030—property, careers, lifestyle, and opportunities. 
-            No fluff. No noise. Just the signals that matter.
+
+          <p className="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed mb-8 sm:mb-10 max-w-xl mx-auto px-2 sm:px-0">
+            Vision 2030 is rewriting the rules. $3 trillion in projects. New cities rising. Visa gates opening. Every Thursday, get the one opportunity worth acting on — distilled to 5 minutes, zero noise.
           </p>
 
           {/* Success Message */}
           {success && (
-            <div className="mb-6 bg-green-50 border-l-4 border-green-500 rounded-r-lg p-4 shadow-sm">
-              <div className="flex items-center gap-3">
-                <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+            <div className="mb-6 bg-green-500/20 border border-green-400/40 rounded-lg p-4 backdrop-blur-sm">
+              <div className="flex items-center justify-center gap-3">
+                <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
                 <div>
-                  <p className="text-green-800 font-semibold text-sm">Successfully subscribed!</p>
-                  <p className="text-green-700 text-xs">Check your email for confirmation.</p>
+                  <p className="text-green-200 font-semibold text-sm">Successfully subscribed!</p>
+                  <p className="text-green-300/80 text-xs">Check your email for confirmation.</p>
                 </div>
               </div>
             </div>
@@ -86,30 +94,31 @@ export default function NewsletterLanding() {
 
           {/* Error Message */}
           {error && (
-            <div className="mb-6 bg-red-50 border-l-4 border-red-500 rounded-r-lg p-4 shadow-sm">
-              <p className="text-red-700 text-sm">{error}</p>
+            <div className="mb-6 bg-red-500/20 border border-red-400/40 rounded-lg p-4 backdrop-blur-sm">
+              <p className="text-red-200 text-sm">{error}</p>
             </div>
           )}
 
-          {/* Email Input - Simple */}
-          <div className="max-w-md mx-auto mb-6">
+          {/* Email Input */}
+          <div className="max-w-md mx-auto mb-4">
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="your.email@company.com"
+              placeholder="your@email.com"
               disabled={loading}
-              className="w-full px-6 py-4 border-2 border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-gray-900 transition-all disabled:bg-gray-50 disabled:cursor-not-allowed text-center"
+              className="w-full px-6 py-4 bg-white/10 border-2 border-white/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-white/70 focus:bg-white/15 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-center backdrop-blur-sm text-base sm:text-lg"
+              style={{ fontSize: '16px' }}
               required
             />
           </div>
 
-          {/* Submit Button */}
+          {/* CTA Button */}
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className="w-full max-w-md mx-auto block py-4 px-8 bg-black hover:bg-gray-800 text-white font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed mb-8"
+            className="w-full max-w-md mx-auto block py-4 px-8 bg-white hover:bg-gray-100 text-black font-bold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed mb-6 sm:mb-8 text-base sm:text-lg cta-pulse min-h-[48px]"
           >
             {loading ? (
               <span className="flex items-center justify-center gap-2">
@@ -120,24 +129,31 @@ export default function NewsletterLanding() {
                 Joining...
               </span>
             ) : (
-              'Join for Free'
+              'Get My First Brief'
             )}
           </button>
 
-          {/* Trust Indicators */}
-          <div className="space-y-4 text-gray-600">
-            <p className="flex items-center justify-center gap-2 text-sm">
-              <span>Join 2,847 UK, European & US professionals, investors & strategic relocators</span>
-            </p>
-            
-            <div className="border-t border-gray-200 pt-4">
-              <p className="text-sm">
-                <strong>Free bonus:</strong> Get your <strong>Personalized Saudi Arabia Opportunity Map</strong>—a 10-page guide tailored to your interests
-              </p>
-            </div>
-          </div>
+          {/* Social Proof */}
+          <p className="text-gray-300 text-sm">
+            2,847 professionals, investors and relocators already inside. Next briefing drops Thursday.
+          </p>
         </div>
-      </div>
+      </section>
+
+      {/* BONUS SECTION */}
+      <section className="bg-gray-950 px-4 sm:px-6 py-14 sm:py-20">
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="text-amber-400 font-semibold text-sm uppercase tracking-widest mb-4">
+            Founding Member Bonus
+          </p>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
+            Free for founding members
+          </h2>
+          <p className="text-lg text-gray-300 leading-relaxed max-w-xl mx-auto">
+            Your Personalized Saudi Opportunity Map — a 10-page guide built from your goals (invest, relocate, build, or explore). Delivered on signup.
+          </p>
+        </div>
+      </section>
     </div>
   )
 }

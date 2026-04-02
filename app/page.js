@@ -143,6 +143,7 @@ export default function NewsletterLanding() {
               name="email"
               value={formData.email}
               onChange={handleChange}
+              onKeyDown={e => e.key === 'Enter' && handleSubmit(e)}
               placeholder="your@email.com"
               disabled={loading}
               className="w-full px-6 py-4 bg-white/10 border-2 border-white/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-white/70 focus:bg-white/15 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-center backdrop-blur-sm text-base sm:text-lg"

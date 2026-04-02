@@ -111,7 +111,7 @@ export async function POST(request) {
             <div class="logo"
                  style="font-family:Georgia,serif;font-size:42px;font-weight:bold;
                         color:#FFFDF7;line-height:1;letter-spacing:-1px;margin:12px 0 6px 0;">
-              The Kingdom <span style="color:#C9A84C;">Brief</span>
+              The Kingdom <span style="color:#C9A84C;">Edit</span>
             </div>
             <div style="font-size:11px;color:rgba(255,253,247,0.5);letter-spacing:2px;
                         text-transform:uppercase;margin-bottom:24px;">

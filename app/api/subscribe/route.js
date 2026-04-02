@@ -171,37 +171,28 @@ export async function POST(request) {
                   <table border="0" cellpadding="0" cellspacing="0" width="100%">
                     <tr>
                       <td style="padding:8px 0;border-bottom:1px solid rgba(255,253,247,0.08);">
-                        <span style="font-size:12px;color:#C9A84C;font-weight:bold;">Day 2</span>
+                        <span style="font-size:12px;color:#C9A84C;font-weight:bold;">Every Tuesday</span>
                         &nbsp;&nbsp;
                         <span style="font-size:13px;color:rgba(255,253,247,0.8);">
-                          The 3 Saudi myths costing people money
+                          The Kingdom Edit in your inbox at 8am GMT
                         </span>
                       </td>
                     </tr>
                     <tr>
                       <td style="padding:8px 0;border-bottom:1px solid rgba(255,253,247,0.08);">
-                        <span style="font-size:12px;color:#C9A84C;font-weight:bold;">Day 4</span>
+                        <span style="font-size:12px;color:#C9A84C;font-weight:bold;">Every Friday</span>
                         &nbsp;&nbsp;
                         <span style="font-size:13px;color:rgba(255,253,247,0.8);">
-                          What our readers are actually asking this week
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="padding:8px 0;border-bottom:1px solid rgba(255,253,247,0.08);">
-                        <span style="font-size:12px;color:#C9A84C;font-weight:bold;">Day 6</span>
-                        &nbsp;&nbsp;
-                        <span style="font-size:13px;color:rgba(255,253,247,0.8);">
-                          Your first brief drops tomorrow — preview inside
+                          The Kingdom Edit in your inbox at 8am GMT
                         </span>
                       </td>
                     </tr>
                     <tr>
                       <td style="padding:8px 0;">
-                        <span style="font-size:12px;color:#C9A84C;font-weight:bold;">Tue &amp; Fri</span>
+                        <span style="font-size:12px;color:#C9A84C;font-weight:bold;">Bonus</span>
                         &nbsp;&nbsp;
                         <span style="font-size:13px;color:rgba(255,253,247,0.8);">
-                          The full Kingdom Brief — 8am GMT 🇸🇦
+                          Your Saudi Opportunity Map delivered on signup 🇸🇦
                         </span>
                       </td>
                     </tr>
@@ -218,11 +209,10 @@ export async function POST(request) {
                 <td style="padding:16px 20px;">
                   <p style="font-size:12px;font-weight:bold;color:#8B6914;
                             margin:0 0 6px 0;letter-spacing:0.5px;">
-                    📱 SIGNED UP FOR WHATSAPP ALERTS?
+                    📱 COMING SOON — WHATSAPP ALERTS
                   </p>
                   <p style="font-size:13px;color:#3D3530;line-height:1.7;margin:0;">
-                    Reply <strong>START</strong> to the WhatsApp message you just received
-                    to confirm your breaking Saudi news alerts.
+                    We're working on breaking Saudi news alerts via WhatsApp. Stay tuned — it's coming soon!
                   </p>
                 </td>
               </tr>
@@ -271,23 +261,22 @@ export async function POST(request) {
 </html>`
 
     const welcomeText = [
-      `You're in, ${greetingName}. Welcome to The Kingdom Brief.`,
+      `Welcome to The Kingdom Edit Newsletter!`,
       '',
-      'Every Tuesday and Friday at 8am GMT, The Kingdom Brief lands in your inbox.',
+      'Every Tuesday and Friday at 8am GMT, The Kingdom Edit lands in your inbox.',
       '5 minutes. Everything that matters in Saudi Arabia. Nothing that doesn\'t.',
       '',
-      'Here\'s what\'s coming your way:',
-      '- Day 2:        The 3 Saudi myths costing people money',
-      '- Day 4:        What our readers are actually asking this week',
-      '- Day 6:        Your first brief drops tomorrow — preview inside',
-      '- Tue & Fri:    The full Kingdom Brief at 8am GMT',
+      'What\'s coming your way:',
+      '- Every Tuesday: The Kingdom Edit at 8am GMT',
+      '- Every Friday:  The Kingdom Edit at 8am GMT',
+      '- Bonus:         Your Saudi Opportunity Map delivered on signup',
       '',
-      'Also signed up for WhatsApp? Reply START to confirm your alerts.',
+      'WhatsApp alerts coming soon.',
       '',
-      'Questions? Just reply to this email — I read every one.',
+      'Questions? Just reply to this email.',
       '',
       'Welcome aboard,',
-      'The Kingdom Brief'
+      'The Kingdom Edit Team'
     ].join('\n')
 
     try {
@@ -302,7 +291,7 @@ export async function POST(request) {
           sender:  { name: BREVO_SENDER_NAME, email: BREVO_SENDER_EMAIL },
           to:      [{ email: email.toLowerCase(), name: firstNameSafe || email }],
           replyTo: { email: BREVO_REPLY_TO, name: BREVO_SENDER_NAME },
-          subject: `You're in, ${greetingName}. Welcome to The Kingdom Brief 🇸🇦`,
+          subject: `Welcome to The Kingdom Edit Newsletter 🇸🇦`,
           htmlContent: welcomeHtml,
           textContent: welcomeText
         })

@@ -115,7 +115,7 @@ export async function POST(request) {
             </div>
             <div style="font-size:11px;color:rgba(255,253,247,0.5);letter-spacing:2px;
                         text-transform:uppercase;margin-bottom:24px;">
-              Your Weekly Saudi Arabia Digest
+              Your Twice-Weekly Saudi Arabia Digest
             </div>
             <table border="0" cellpadding="0" cellspacing="0" width="100%">
               <tr>
@@ -141,7 +141,7 @@ export async function POST(request) {
             </p>
             <p style="font-size:13px;color:rgba(255,253,247,0.75);line-height:1.75;
                       margin:0;text-align:center;">
-              Every Friday at 8am GMT, The Kingdom Brief lands in your inbox.
+              Every Tuesday and Friday at 8am GMT, The Kingdom Brief lands in your inbox.
               5 minutes. Everything that matters in Saudi Arabia. Nothing that doesn't.
             </p>
           </td>
@@ -198,7 +198,7 @@ export async function POST(request) {
                     </tr>
                     <tr>
                       <td style="padding:8px 0;">
-                        <span style="font-size:12px;color:#C9A84C;font-weight:bold;">Every Friday</span>
+                        <span style="font-size:12px;color:#C9A84C;font-weight:bold;">Tue &amp; Fri</span>
                         &nbsp;&nbsp;
                         <span style="font-size:13px;color:rgba(255,253,247,0.8);">
                           The full Kingdom Brief — 8am GMT 🇸🇦
@@ -257,7 +257,7 @@ export async function POST(request) {
           <td align="center" style="background-color:#1A1208;padding:20px 40px;">
             <p style="font-size:11px;color:rgba(255,253,247,0.3);
                       line-height:1.8;margin:0;text-align:center;">
-              The Kingdom Brief &nbsp;·&nbsp; Weekly Newsletter<br/>
+              The Kingdom Brief &nbsp;·&nbsp; Twice-Weekly Newsletter<br/>
               You're receiving this because you subscribed to The Kingdom Brief.
             </p>
           </td>
@@ -273,14 +273,14 @@ export async function POST(request) {
     const welcomeText = [
       `You're in, ${greetingName}. Welcome to The Kingdom Brief.`,
       '',
-      'Every Friday at 8am GMT, The Kingdom Brief lands in your inbox.',
+      'Every Tuesday and Friday at 8am GMT, The Kingdom Brief lands in your inbox.',
       '5 minutes. Everything that matters in Saudi Arabia. Nothing that doesn\'t.',
       '',
       'Here\'s what\'s coming your way:',
       '- Day 2:        The 3 Saudi myths costing people money',
       '- Day 4:        What our readers are actually asking this week',
       '- Day 6:        Your first brief drops tomorrow — preview inside',
-      '- Every Friday: The full Kingdom Brief at 8am GMT',
+      '- Tue & Fri:    The full Kingdom Brief at 8am GMT',
       '',
       'Also signed up for WhatsApp? Reply START to confirm your alerts.',
       '',

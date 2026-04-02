@@ -71,12 +71,15 @@ export async function POST(request) {
     const greetingName  = firstNameSafe || 'there'
 
     const welcomeHtml = `<!DOCTYPE html>
-<html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="color-scheme" content="light only">
+  <meta name="supported-color-schemes" content="light only">
   <title>Welcome to The Kingdom Edit</title>
   <style>
+    :root { color-scheme: light only; }
     @media only screen and (max-width: 640px) {
       .email-container { width: 100% !important; }
       .email-body { padding: 24px 20px !important; }

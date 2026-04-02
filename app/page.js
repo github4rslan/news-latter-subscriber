@@ -1,7 +1,32 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { CheckCircle } from 'lucide-react'
+
+function useCountUp(target, duration = 1200) {
+  const [display, setDisplay] = useState(target)
+  const prev = useRef(target)
+
+  useEffect(() => {
+    if (prev.current === target) return
+    const start = prev.current
+    const diff = target - start
+    const startTime = performance.now()
+
+    const tick = (now) => {
+      const elapsed = now - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setDisplay(Math.round(start + diff * eased))
+      if (progress < 1) requestAnimationFrame(tick)
+      else prev.current = target
+    }
+
+    requestAnimationFrame(tick)
+  }, [target, duration])
+
+  return display
+}
 
 export default function NewsletterLanding() {
   const [formData, setFormData] = useState({
@@ -12,6 +37,15 @@ export default function NewsletterLanding() {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
+  const [subscriberCount, setSubscriberCount] = useState(null)
+  const animatedCount = useCountUp(subscriberCount ?? 0)
+
+  useEffect(() => {
+    fetch('/api/subscriber-count')
+      .then(r => r.json())
+      .then(d => setSubscriberCount(d.count))
+      .catch(() => setSubscriberCount(2847))
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -40,6 +74,7 @@ export default function NewsletterLanding() {
       }
 
       setSuccess(true)
+      setSubscriberCount(c => (c ?? 2847) + 1)
       setFormData({ firstName: '', lastName: '', email: '' })
 
       setTimeout(() => setSuccess(false), 5000)
@@ -134,9 +169,21 @@ export default function NewsletterLanding() {
           </button>
 
           {/* Social Proof */}
-          <p className="text-gray-300 text-sm">
-            2,847 professionals, investors and relocators already inside. Drops every Tuesday & Friday.
-          </p>
+          <div className="flex items-center justify-center gap-2 text-sm">
+            <div className="flex -space-x-2">
+              {['#C9A84C', '#E8C97A', '#A07830'].map((color, i) => (
+                <div key={i} className="w-7 h-7 rounded-full border-2 border-white/20 flex items-center justify-center" style={{ backgroundColor: color }}>
+                  <span className="text-xs font-bold text-white">{['A','K','S'][i]}</span>
+                </div>
+              ))}
+            </div>
+            <p className="text-gray-300">
+              <span className="text-white font-semibold">
+                {subscriberCount === null ? '...' : animatedCount.toLocaleString()}
+              </span>
+              {' '}professionals already inside. Drops every Tuesday & Friday.
+            </p>
+          </div>
         </div>
       </section>
 

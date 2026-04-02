@@ -169,12 +169,20 @@ export default function NewsletterLanding() {
           </button>
 
           {/* Social Proof */}
-          <div className="flex items-center justify-center gap-2 text-sm">
-            <div className="flex -space-x-2">
-              {['#C9A84C', '#E8C97A', '#A07830'].map((color, i) => (
-                <div key={i} className="w-7 h-7 rounded-full border-2 border-white/20 flex items-center justify-center" style={{ backgroundColor: color }}>
-                  <span className="text-xs font-bold text-white">{['A','K','S'][i]}</span>
-                </div>
+          <div className="flex items-center justify-center gap-3 text-sm">
+            <div className="flex -space-x-3">
+              {[
+                'https://api.dicebear.com/7.x/avataaars/svg?seed=Omar&backgroundColor=b6e3f4',
+                'https://api.dicebear.com/7.x/avataaars/svg?seed=Khalid&backgroundColor=c0aede',
+                'https://api.dicebear.com/7.x/avataaars/svg?seed=Sara&backgroundColor=ffd5dc',
+                'https://api.dicebear.com/7.x/avataaars/svg?seed=Ahmed&backgroundColor=d1f4d1',
+              ].map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt="subscriber"
+                  className="w-9 h-9 rounded-full border-2 border-white/30 bg-white/10"
+                />
               ))}
             </div>
             <p className="text-gray-300">

@@ -76,7 +76,7 @@ export default function NewsletterLanding() {
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed mb-8 sm:mb-10 max-w-xl mx-auto px-2 sm:px-0">
-            Vision 2030 is rewriting the rules. $3 trillion in projects. New cities rising. Visa gates opening. Every Thursday, get the one opportunity worth acting on — distilled to 5 minutes, zero noise.
+            Vision 2030 is rewriting the rules. $3 trillion in projects. New cities rising. Visa gates opening. Every Tuesday and Friday, get the opportunities worth acting on — distilled to 5 minutes, zero noise.
           </p>
 
           {/* Success Message */}
@@ -135,7 +135,7 @@ export default function NewsletterLanding() {
 
           {/* Social Proof */}
           <p className="text-gray-300 text-sm">
-            2,847 professionals, investors and relocators already inside. Next briefing drops Thursday.
+            2,847 professionals, investors and relocators already inside. Drops every Tuesday & Friday.
           </p>
         </div>
       </section>

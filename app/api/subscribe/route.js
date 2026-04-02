@@ -14,7 +14,7 @@ export async function POST(request) {
 
     const BREVO_API_KEY     = process.env.BREVO_API_KEY
     const BREVO_LIST_ID     = Number.parseInt(process.env.BREVO_LIST_ID, 10)
-    const BREVO_SENDER_NAME  = process.env.BREVO_SENDER_NAME || 'The Kingdom Brief'
+    const BREVO_SENDER_NAME  = process.env.BREVO_SENDER_NAME || 'The Kingdom Edit'
     const BREVO_SENDER_EMAIL = process.env.BREVO_SENDER_EMAIL
     const BREVO_REPLY_TO    = process.env.BREVO_REPLY_TO || BREVO_SENDER_EMAIL
 
@@ -75,7 +75,7 @@ export async function POST(request) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Welcome to The Kingdom Brief</title>
+  <title>Welcome to The Kingdom Edit</title>
   <style>
     @media only screen and (max-width: 640px) {
       .email-container { width: 100% !important; }
@@ -141,7 +141,7 @@ export async function POST(request) {
             </p>
             <p style="font-size:13px;color:rgba(255,253,247,0.75);line-height:1.75;
                       margin:0;text-align:center;">
-              Every Tuesday and Friday at 8am GMT, The Kingdom Brief lands in your inbox.
+              Every Tuesday and Friday at 8am GMT, The Kingdom Edit lands in your inbox.
               5 minutes. Everything that matters in Saudi Arabia. Nothing that doesn't.
             </p>
           </td>
@@ -233,7 +233,7 @@ export async function POST(request) {
                   </p>
                   <p style="font-family:Georgia,serif;font-size:20px;
                             font-weight:bold;color:#1A1208;margin:0;">
-                    The Kingdom Brief
+                    The Kingdom Edit
                   </p>
                 </td>
               </tr>
@@ -247,8 +247,8 @@ export async function POST(request) {
           <td align="center" style="background-color:#1A1208;padding:20px 40px;">
             <p style="font-size:11px;color:rgba(255,253,247,0.3);
                       line-height:1.8;margin:0;text-align:center;">
-              The Kingdom Brief &nbsp;·&nbsp; Twice-Weekly Newsletter<br/>
-              You're receiving this because you subscribed to The Kingdom Brief.
+              The Kingdom Edit &nbsp;·&nbsp; Twice-Weekly Newsletter<br/>
+              You're receiving this because you subscribed to The Kingdom Edit.
             </p>
           </td>
         </tr>

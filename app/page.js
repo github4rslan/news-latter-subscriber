@@ -97,7 +97,7 @@ export default function NewsletterLanding() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* HERO SECTION */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 py-12 sm:py-16">
+      <section className="relative min-h-[100svh] flex items-center justify-center px-5 sm:px-6 py-16 sm:py-20">
         {/* Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -108,11 +108,11 @@ export default function NewsletterLanding() {
 
         {/* Content */}
         <div className="relative z-10 max-w-2xl w-full text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight tracking-tight">
+          <h1 className="text-[2rem] sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight tracking-tight">
             The Saudi Entry Strategy
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed mb-8 sm:mb-10 max-w-xl mx-auto px-2 sm:px-0">
+          <p className="text-sm sm:text-lg md:text-xl text-gray-200 leading-relaxed mb-8 sm:mb-10 max-w-xl mx-auto px-0">
             Vision 2030 is rewriting the rules. $3 trillion in projects. New cities rising. Visa gates opening. Every Tuesday and Friday, get the opportunities worth acting on. Distilled to 5 minutes, zero noise.
           </p>
 
@@ -171,18 +171,18 @@ export default function NewsletterLanding() {
           </button>
 
           {/* Social Proof */}
-          <div className="flex items-center justify-center gap-3 text-sm">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
             <div className="flex -space-x-3">
               {AVATARS.map((src, i) => (
                 <img
                   key={i}
                   src={src}
                   alt="subscriber"
-                  className="w-9 h-9 rounded-full border-2 border-white/30 bg-white/10"
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-white/30 bg-white/10"
                 />
               ))}
             </div>
-            <p className="text-gray-300">
+            <p className="text-gray-300 text-xs sm:text-sm text-center">
               <span className="text-white font-semibold">
                 {subscriberCount === null ? '...' : animatedCount.toLocaleString()}
               </span>

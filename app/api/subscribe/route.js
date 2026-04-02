@@ -209,17 +209,17 @@ export async function POST(request) {
                 <td style="padding:16px 20px;">
                   <p style="font-size:12px;font-weight:bold;color:#8B6914;
                             margin:0 0 6px 0;letter-spacing:0.5px;">
-                    📱 COMING SOON — WHATSAPP ALERTS
+                    📱 COMING SOON: WHATSAPP ALERTS
                   </p>
                   <p style="font-size:13px;color:#3D3530;line-height:1.7;margin:0;">
-                    We're working on breaking Saudi news alerts via WhatsApp. Stay tuned — it's coming soon!
+                    We're working on breaking Saudi news alerts via WhatsApp. Stay tuned, it's coming soon!
                   </p>
                 </td>
               </tr>
             </table>
 
             <p style="font-size:14px;color:#3D3530;line-height:1.8;margin:0 0 6px 0;">
-              Questions? Just reply to this email — I read every one.
+              Questions? Just reply to this email. I read every one.
             </p>
 
             <!-- Sign off -->

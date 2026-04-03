@@ -4,56 +4,56 @@ import { useState, useEffect, useRef } from 'react'
 import { CheckCircle } from 'lucide-react'
 
 const RECENT_SUBSCRIBERS = [
-  { name: 'Omar Al-Rashid', location: 'Dubai, UAE', time: '2 minutes ago' },
-  { name: 'Fatima Al-Zahra', location: 'Riyadh, KSA', time: '11 minutes ago' },
-  { name: 'Khalid Al-Mansour', location: 'London, UK', time: '24 minutes ago' },
-  { name: 'Aisha Mahmoud', location: 'Toronto, CA', time: '38 minutes ago' },
-  { name: 'Yusuf Al-Farsi', location: 'Jeddah, KSA', time: '1 hour ago' },
-  { name: 'Noor Al-Hassan', location: 'Amsterdam, NL', time: '2 hours ago' },
-  { name: 'Ibrahim Al-Sayed', location: 'New York, US', time: '3 hours ago' },
-  { name: 'Mariam Al-Qasim', location: 'Singapore', time: '5 hours ago' },
-  { name: 'Abdullah Al-Otaibi', location: 'Riyadh, KSA', time: '6 hours ago' },
-  { name: 'Zainab Al-Hussain', location: 'Manama, BH', time: '7 hours ago' },
-  { name: 'Tariq Al-Shamsi', location: 'Abu Dhabi, UAE', time: '8 hours ago' },
-  { name: 'Layla Al-Amin', location: 'Paris, FR', time: '9 hours ago' },
-  { name: 'Hassan Al-Mutairi', location: 'Kuwait City, KW', time: '10 hours ago' },
-  { name: 'Rania Al-Jabri', location: 'Doha, QA', time: '11 hours ago' },
-  { name: 'Saad Al-Ghamdi', location: 'Makkah, KSA', time: '12 hours ago' },
-  { name: 'Dina Al-Masri', location: 'Amman, JO', time: '13 hours ago' },
-  { name: 'Faris Al-Zahrani', location: 'Sydney, AU', time: '14 hours ago' },
-  { name: 'Hana Al-Bakri', location: 'Berlin, DE', time: '15 hours ago' },
-  { name: 'Walid Al-Harbi', location: 'Madinah, KSA', time: '16 hours ago' },
-  { name: 'Samira Al-Khalidi', location: 'Cairo, EG', time: '17 hours ago' },
-  { name: 'Nawaf Al-Shehri', location: 'Houston, US', time: '18 hours ago' },
-  { name: 'Lina Al-Turki', location: 'Stockholm, SE', time: '19 hours ago' },
-  { name: 'Majid Al-Anazi', location: 'Dammam, KSA', time: '20 hours ago' },
-  { name: 'Sara Al-Sulaiman', location: 'Kuala Lumpur, MY', time: '21 hours ago' },
-  { name: 'Hamad Al-Dosari', location: 'Doha, QA', time: '22 hours ago' },
-  { name: 'Noura Al-Rashidi', location: 'Dubai, UAE', time: '23 hours ago' },
-  { name: 'Bilal Al-Sabah', location: 'Kuwait City, KW', time: '1 day ago' },
-  { name: 'Hessa Al-Naimi', location: 'Abu Dhabi, UAE', time: '1 day ago' },
-  { name: 'Sami Al-Qahtani', location: 'Jeddah, KSA', time: '1 day ago' },
-  { name: 'Mona Al-Saud', location: 'London, UK', time: '1 day ago' },
-  { name: 'Jassim Al-Thani', location: 'Doha, QA', time: '1 day ago' },
-  { name: 'Reem Al-Farhan', location: 'Toronto, CA', time: '1 day ago' },
-  { name: 'Turki Al-Faisal', location: 'Riyadh, KSA', time: '2 days ago' },
-  { name: 'Asma Al-Wakeel', location: 'Dubai, UAE', time: '2 days ago' },
-  { name: 'Nasser Al-Bloushi', location: 'Sharjah, UAE', time: '2 days ago' },
-  { name: 'Ghada Al-Muhairi', location: 'Amsterdam, NL', time: '2 days ago' },
-  { name: 'Rashid Al-Mazrouei', location: 'Dubai, UAE', time: '2 days ago' },
-  { name: 'Iman Al-Siddiq', location: 'Manchester, UK', time: '2 days ago' },
-  { name: 'Salman Al-Dosari', location: 'Manama, BH', time: '2 days ago' },
-  { name: 'Dalal Al-Otaibi', location: 'New York, US', time: '2 days ago' },
-  { name: 'Faisal Al-Muqrin', location: 'Riyadh, KSA', time: '3 days ago' },
-  { name: 'Haifa Al-Mansouri', location: 'Paris, FR', time: '3 days ago' },
-  { name: 'Yousef Al-Balushi', location: 'Muscat, OM', time: '3 days ago' },
-  { name: 'Wafa Al-Shammari', location: 'Dubai, UAE', time: '3 days ago' },
-  { name: 'Meshal Al-Sabah', location: 'Kuwait City, KW', time: '3 days ago' },
-  { name: 'Arwa Al-Zahrani', location: 'Melbourne, AU', time: '3 days ago' },
-  { name: 'Ziad Al-Husseini', location: 'Beirut, LB', time: '3 days ago' },
-  { name: 'Manal Al-Rasheed', location: 'Singapore', time: '4 days ago' },
-  { name: 'Sultan Al-Ameri', location: 'Abu Dhabi, UAE', time: '4 days ago' },
-  { name: 'Hind Al-Mutawa', location: 'London, UK', time: '4 days ago' },
+  { name: 'Omar', location: 'Dubai, UAE' },
+  { name: 'Fatima', location: 'Riyadh, KSA' },
+  { name: 'Khalid', location: 'London, UK' },
+  { name: 'Aisha', location: 'Toronto, CA' },
+  { name: 'Yusuf', location: 'Jeddah, KSA' },
+  { name: 'Noor', location: 'Amsterdam, NL' },
+  { name: 'Ibrahim', location: 'New York, US' },
+  { name: 'Mariam', location: 'Singapore' },
+  { name: 'Abdullah', location: 'Riyadh, KSA' },
+  { name: 'Zainab', location: 'Manama, BH' },
+  { name: 'Tariq', location: 'Abu Dhabi, UAE' },
+  { name: 'Layla', location: 'Paris, FR' },
+  { name: 'Hassan', location: 'Kuwait City, KW' },
+  { name: 'Rania', location: 'Doha, QA' },
+  { name: 'Saad', location: 'Makkah, KSA' },
+  { name: 'Dina', location: 'Amman, JO' },
+  { name: 'Faris', location: 'Sydney, AU' },
+  { name: 'Hana', location: 'Berlin, DE' },
+  { name: 'Walid', location: 'Madinah, KSA' },
+  { name: 'Samira', location: 'Cairo, EG' },
+  { name: 'Nawaf', location: 'Houston, US' },
+  { name: 'Lina', location: 'Stockholm, SE' },
+  { name: 'Majid', location: 'Dammam, KSA' },
+  { name: 'Sara', location: 'Kuala Lumpur, MY' },
+  { name: 'Hamad', location: 'Doha, QA' },
+  { name: 'Noura', location: 'Dubai, UAE' },
+  { name: 'Bilal', location: 'Kuwait City, KW' },
+  { name: 'Hessa', location: 'Abu Dhabi, UAE' },
+  { name: 'Sami', location: 'Jeddah, KSA' },
+  { name: 'Mona', location: 'London, UK' },
+  { name: 'Jassim', location: 'Doha, QA' },
+  { name: 'Reem', location: 'Toronto, CA' },
+  { name: 'Turki', location: 'Riyadh, KSA' },
+  { name: 'Asma', location: 'Dubai, UAE' },
+  { name: 'Nasser', location: 'Sharjah, UAE' },
+  { name: 'Ghada', location: 'Amsterdam, NL' },
+  { name: 'Rashid', location: 'Dubai, UAE' },
+  { name: 'Iman', location: 'Manchester, UK' },
+  { name: 'Salman', location: 'Manama, BH' },
+  { name: 'Dalal', location: 'New York, US' },
+  { name: 'Faisal', location: 'Riyadh, KSA' },
+  { name: 'Haifa', location: 'Paris, FR' },
+  { name: 'Yousef', location: 'Muscat, OM' },
+  { name: 'Wafa', location: 'Dubai, UAE' },
+  { name: 'Meshal', location: 'Kuwait City, KW' },
+  { name: 'Arwa', location: 'Melbourne, AU' },
+  { name: 'Ziad', location: 'Beirut, LB' },
+  { name: 'Manal', location: 'Singapore' },
+  { name: 'Sultan', location: 'Abu Dhabi, UAE' },
+  { name: 'Hind', location: 'London, UK' },
 ]
 
 function shuffle(arr) {
@@ -101,21 +101,28 @@ function SubscriberToast() {
 
   return (
     <div
-      className="fixed bottom-6 left-6 z-50 transition-all duration-400"
+      className="fixed bottom-6 left-4 sm:left-6 z-50"
       style={{
-        transform: visible ? 'translateY(0)' : 'translateY(120%)',
+        transform: visible ? 'translateY(0)' : 'translateY(130%)',
         opacity: visible ? 1 : 0,
-        transition: 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease',
+        transition: 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease',
       }}
     >
-      <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl px-4 py-3 shadow-2xl max-w-[260px]">
-        <div className="w-9 h-9 rounded-full bg-amber-500/20 border border-amber-400/30 flex items-center justify-center flex-shrink-0">
-          <span className="text-amber-300 font-bold text-sm">{sub.name.charAt(0)}</span>
+      <div className="flex items-center gap-3 bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl px-4 py-3 shadow-2xl max-w-[280px]">
+        {/* Avatar */}
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+          <span className="text-black font-bold text-sm">{sub.name.charAt(0)}</span>
         </div>
+        {/* Text */}
         <div className="min-w-0">
-          <p className="text-white text-xs font-semibold truncate">{sub.name}</p>
-          <p className="text-gray-400 text-xs truncate">{sub.location}</p>
-          <p className="text-amber-400/80 text-[10px] mt-0.5">{sub.time} · subscribed</p>
+          <div className="flex items-center gap-1.5 mb-0.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
+            <p className="text-white/50 text-[10px] uppercase tracking-widest font-medium">New subscriber</p>
+          </div>
+          <p className="text-white text-sm font-semibold leading-tight">
+            Welcome, {sub.name}! 🎉
+          </p>
+          <p className="text-gray-400 text-xs mt-0.5">{sub.location} · joined today</p>
         </div>
       </div>
     </div>

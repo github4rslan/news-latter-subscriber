@@ -333,6 +333,59 @@ export default function NewsletterLanding() {
           </p>
         </div>
       </section>
+
+      {/* SEO CONTENT SECTION */}
+      <section className="bg-black px-4 sm:px-6 py-16 border-t border-white/5">
+        <div className="max-w-2xl mx-auto">
+
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">About The Kingdom Edit</h2>
+          <p className="text-gray-400 text-sm leading-relaxed mb-8">
+            The Kingdom Edit is a twice-weekly newsletter dedicated to Saudi Arabia's transformation under Vision 2030. We cover the opportunities that matter — real estate, careers, business, investment, and lifestyle — distilled into a 5-minute read every Tuesday and Friday. Whether you're a professional considering relocating to Saudi Arabia, an expat already living in the Kingdom, or an investor watching the region's growth, The Kingdom Edit keeps you informed and ahead.
+          </p>
+
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">Frequently Asked Questions</h2>
+          <div className="space-y-6">
+            {[
+              {
+                q: 'What is The Kingdom Edit?',
+                a: 'The Kingdom Edit is a free twice-weekly newsletter covering Saudi Arabia\'s biggest opportunities across real estate, careers, business, and Vision 2030 developments. It is published every Tuesday and Friday.'
+              },
+              {
+                q: 'Who is The Kingdom Edit for?',
+                a: 'The Kingdom Edit is for Muslim professionals, investors, entrepreneurs, and relocators who want to stay informed about opportunities in Saudi Arabia. Our readers span the UAE, UK, US, Canada, and across the Muslim world.'
+              },
+              {
+                q: 'How often is The Kingdom Edit published?',
+                a: 'The Kingdom Edit is published twice a week — every Tuesday and Friday at 8am GMT.'
+              },
+              {
+                q: 'Is The Kingdom Edit free?',
+                a: 'Yes, The Kingdom Edit is completely free to subscribe. Founding members also receive a free Personalized Saudi Opportunity Map on signup.'
+              },
+              {
+                q: 'What topics does The Kingdom Edit cover?',
+                a: 'The Kingdom Edit covers Saudi Arabia\'s Vision 2030 projects, real estate market updates, job and career opportunities, business setup, investment trends, visa and residency news, and lifestyle developments in the Kingdom.'
+              },
+            ].map(({ q, a }) => (
+              <div key={q} className="border-b border-white/10 pb-6">
+                <h3 className="text-white font-semibold text-sm mb-2">{q}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{a}</p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="bg-black px-4 py-6 border-t border-white/5">
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="text-gray-600 text-xs">
+            © {new Date().getFullYear()} The Kingdom Edit · <a href="mailto:info@thekingdomedit.com" className="hover:text-gray-400 transition-colors">info@thekingdomedit.com</a>
+          </p>
+        </div>
+      </footer>
+
     </div>
   )
 }

@@ -300,20 +300,6 @@ export default function NewsletterLanding() {
         </div>
       </section>
 
-      {/* BONUS SECTION */}
-      <section className="bg-gray-950 px-4 sm:px-6 py-14 sm:py-20">
-        <div className="max-w-2xl mx-auto text-center">
-          <p className="text-amber-400 font-semibold text-sm uppercase tracking-widest mb-4">
-            Founding Member Bonus
-          </p>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
-            Free for founding members
-          </h2>
-          <p className="text-lg text-gray-300 leading-relaxed max-w-xl mx-auto">
-            Your Personalized Saudi Opportunity Map — a 10-page guide built from your goals (invest, relocate, build, or explore). Delivered on signup.
-          </p>
-        </div>
-      </section>
 
       {/* SEO CONTENT SECTION */}
       <section className="bg-black px-4 sm:px-6 py-16 border-t border-white/5">

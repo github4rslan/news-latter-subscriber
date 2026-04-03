@@ -152,12 +152,6 @@ function useCountUp(target, duration = 1200) {
   return display
 }
 
-const AVATARS = [
-  { initials: 'AK', bg: '#C9A84C' },
-  { initials: 'SR', bg: '#1B4332' },
-  { initials: 'MF', bg: '#1A1208' },
-  { initials: 'NJ', bg: '#7C3F00' },
-]
 
 export default function NewsletterLanding() {
   const [formData, setFormData] = useState({
@@ -292,30 +286,17 @@ export default function NewsletterLanding() {
                 Joining...
               </span>
             ) : (
-              'Get My First Brief'
+              'Get My First Edit'
             )}
           </button>
 
           {/* Social Proof */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-            <div className="flex -space-x-2">
-              {AVATARS.map((a, i) => (
-                <div
-                  key={i}
-                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-white/20 flex items-center justify-center text-white font-semibold text-xs"
-                  style={{ backgroundColor: a.bg }}
-                >
-                  {a.initials}
-                </div>
-              ))}
-            </div>
-            <p className="text-gray-300 text-xs sm:text-sm text-center">
-              <span className="text-white font-semibold">
-                {subscriberCount === null ? '...' : animatedCount.toLocaleString()}
-              </span>
-              {' '}professionals already inside. Drops every Tuesday & Friday.
-            </p>
-          </div>
+          <p className="text-gray-300 text-xs sm:text-sm text-center">
+            <span className="text-white font-semibold">
+              {subscriberCount === null ? '...' : animatedCount.toLocaleString()}
+            </span>
+            {' '}professionals already inside. Drops every Tuesday & Friday.
+          </p>
         </div>
       </section>
 

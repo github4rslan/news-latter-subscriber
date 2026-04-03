@@ -29,10 +29,10 @@ function useCountUp(target, duration = 1200) {
 }
 
 const AVATARS = [
-  'https://api.dicebear.com/7.x/avataaars/svg?seed=Omar&backgroundColor=b6e3f4',
-  'https://api.dicebear.com/7.x/avataaars/svg?seed=Khalid&backgroundColor=c0aede',
-  'https://api.dicebear.com/7.x/avataaars/svg?seed=Sara&backgroundColor=ffd5dc',
-  'https://api.dicebear.com/7.x/avataaars/svg?seed=Ahmed&backgroundColor=d1f4d1',
+  'https://api.dicebear.com/7.x/personas/svg?seed=Omar&backgroundColor=1a1a2e',
+  'https://api.dicebear.com/7.x/personas/svg?seed=Khalid&backgroundColor=2d1b4e',
+  'https://api.dicebear.com/7.x/personas/svg?seed=Sara&backgroundColor=1a3a2e',
+  'https://api.dicebear.com/7.x/personas/svg?seed=Nora&backgroundColor=2e1a1a',
 ]
 
 export default function NewsletterLanding() {

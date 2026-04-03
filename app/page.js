@@ -56,10 +56,19 @@ const RECENT_SUBSCRIBERS = [
   { name: 'Hind Al-Mutawa', location: 'London, UK', time: '4 days ago' },
 ]
 
+function shuffle(arr) {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
+
 function SubscriberToast() {
   const [visible, setVisible] = useState(false)
   const [current, setCurrent] = useState(0)
-  const [entering, setEntering] = useState(false)
+  const shuffled = useRef(shuffle(RECENT_SUBSCRIBERS))
 
   useEffect(() => {
     // First toast after 4 seconds
@@ -74,15 +83,21 @@ function SubscriberToast() {
     setTimeout(() => {
       setVisible(false)
       setTimeout(() => {
-        setCurrent(i => (i + 1) % RECENT_SUBSCRIBERS.length)
-        // Next toast after 8-12 seconds
+        setCurrent(i => {
+          const next = i + 1
+          if (next >= shuffled.current.length) {
+            shuffled.current = shuffle(RECENT_SUBSCRIBERS)
+            return 0
+          }
+          return next
+        })
         const delay = 8000 + Math.random() * 4000
         setTimeout(() => showToast(), delay)
       }, 400)
     }, 4000)
   }
 
-  const sub = RECENT_SUBSCRIBERS[current]
+  const sub = shuffled.current[current]
 
   return (
     <div

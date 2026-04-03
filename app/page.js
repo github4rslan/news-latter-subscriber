@@ -89,10 +89,10 @@ function SubscriberToast() {
           }
           return next
         })
-        const delay = 8000 + Math.random() * 4000
+        const delay = 10000 + Math.random() * 5000
         setTimeout(() => showToast(), delay)
       }, 400)
-    }, 4000)
+    }, 8000)
   }
 
   const sub = shuffled.current[current]

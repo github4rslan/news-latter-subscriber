@@ -77,9 +77,7 @@ function SubscriberToast() {
   }, [])
 
   function showToast() {
-    setEntering(true)
     setVisible(true)
-    setTimeout(() => setEntering(false), 400)
     setTimeout(() => {
       setVisible(false)
       setTimeout(() => {

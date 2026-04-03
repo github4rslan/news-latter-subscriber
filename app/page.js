@@ -29,10 +29,10 @@ function useCountUp(target, duration = 1200) {
 }
 
 const AVATARS = [
-  'https://api.dicebear.com/7.x/personas/svg?seed=Omar&backgroundColor=1a1a2e',
-  'https://api.dicebear.com/7.x/personas/svg?seed=Khalid&backgroundColor=2d1b4e',
-  'https://api.dicebear.com/7.x/personas/svg?seed=Sara&backgroundColor=1a3a2e',
-  'https://api.dicebear.com/7.x/personas/svg?seed=Nora&backgroundColor=2e1a1a',
+  { initials: 'AK', bg: '#C9A84C' },
+  { initials: 'SR', bg: '#1B4332' },
+  { initials: 'MF', bg: '#1A1208' },
+  { initials: 'NJ', bg: '#7C3F00' },
 ]
 
 export default function NewsletterLanding() {
@@ -173,14 +173,15 @@ export default function NewsletterLanding() {
 
           {/* Social Proof */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-            <div className="flex -space-x-3">
-              {AVATARS.map((src, i) => (
-                <img
+            <div className="flex -space-x-2">
+              {AVATARS.map((a, i) => (
+                <div
                   key={i}
-                  src={src}
-                  alt="subscriber"
-                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-white/30 bg-white/10"
-                />
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border-2 border-white/20 flex items-center justify-center text-white font-semibold text-xs"
+                  style={{ backgroundColor: a.bg }}
+                >
+                  {a.initials}
+                </div>
               ))}
             </div>
             <p className="text-gray-300 text-xs sm:text-sm text-center">

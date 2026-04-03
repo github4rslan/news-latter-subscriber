@@ -3,6 +3,68 @@
 import { useState, useEffect, useRef } from 'react'
 import { CheckCircle } from 'lucide-react'
 
+const RECENT_SUBSCRIBERS = [
+  { name: 'Omar Al-Rashid', location: 'Dubai, UAE', time: '2 minutes ago' },
+  { name: 'Fatima Al-Zahra', location: 'Riyadh, KSA', time: '11 minutes ago' },
+  { name: 'Khalid Al-Mansour', location: 'London, UK', time: '24 minutes ago' },
+  { name: 'Aisha Mahmoud', location: 'Toronto, CA', time: '38 minutes ago' },
+  { name: 'Yusuf Al-Farsi', location: 'Jeddah, KSA', time: '1 hour ago' },
+  { name: 'Noor Al-Hassan', location: 'Amsterdam, NL', time: '2 hours ago' },
+  { name: 'Ibrahim Al-Sayed', location: 'New York, US', time: '3 hours ago' },
+  { name: 'Mariam Al-Qasim', location: 'Singapore', time: '5 hours ago' },
+]
+
+function SubscriberToast() {
+  const [visible, setVisible] = useState(false)
+  const [current, setCurrent] = useState(0)
+  const [entering, setEntering] = useState(false)
+
+  useEffect(() => {
+    // First toast after 4 seconds
+    const initial = setTimeout(() => showToast(), 4000)
+    return () => clearTimeout(initial)
+  }, [])
+
+  function showToast() {
+    setEntering(true)
+    setVisible(true)
+    setTimeout(() => setEntering(false), 400)
+    setTimeout(() => {
+      setVisible(false)
+      setTimeout(() => {
+        setCurrent(i => (i + 1) % RECENT_SUBSCRIBERS.length)
+        // Next toast after 8-12 seconds
+        const delay = 8000 + Math.random() * 4000
+        setTimeout(() => showToast(), delay)
+      }, 400)
+    }, 4000)
+  }
+
+  const sub = RECENT_SUBSCRIBERS[current]
+
+  return (
+    <div
+      className="fixed bottom-6 left-6 z-50 transition-all duration-400"
+      style={{
+        transform: visible ? 'translateY(0)' : 'translateY(120%)',
+        opacity: visible ? 1 : 0,
+        transition: 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease',
+      }}
+    >
+      <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl px-4 py-3 shadow-2xl max-w-[260px]">
+        <div className="w-9 h-9 rounded-full bg-amber-500/20 border border-amber-400/30 flex items-center justify-center flex-shrink-0">
+          <span className="text-amber-300 font-bold text-sm">{sub.name.charAt(0)}</span>
+        </div>
+        <div className="min-w-0">
+          <p className="text-white text-xs font-semibold truncate">{sub.name}</p>
+          <p className="text-gray-400 text-xs truncate">{sub.location}</p>
+          <p className="text-amber-400/80 text-[10px] mt-0.5">{sub.time} · subscribed</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function useCountUp(target, duration = 1200) {
   const [display, setDisplay] = useState(target)
   const prev = useRef(target)
@@ -96,6 +158,7 @@ export default function NewsletterLanding() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SubscriberToast />
       {/* HERO SECTION */}
       <section className="relative min-h-[100svh] flex items-center justify-center px-5 sm:px-6 py-8 sm:py-12">
         {/* Background Image */}

@@ -96,8 +96,8 @@ function SubscribeForm({ buttonLabel, formId = 'subscribe-form' }) {
           <div className="flex items-center justify-center gap-3">
             <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
             <div className="text-left">
-              <p className="text-green-200 font-semibold text-sm">Successfully subscribed!</p>
-              <p className="text-green-300/80 text-xs">Check your email for confirmation.</p>
+              <p className="text-green-200 font-semibold text-sm">You&apos;re subscribed!</p>
+              <p className="text-green-300/80 text-xs">Check your inbox for a welcome email.</p>
             </div>
           </div>
         </div>
@@ -148,7 +148,7 @@ function Section({ id, headline, children, className = '' }) {
 export default function NewsletterLanding() {
   return (
     <div className="min-h-screen flex flex-col bg-black">
-      {/* HERO — headline + CTA visible above the fold */}
+      {/* HERO - headline + CTA visible above the fold */}
       <section className="relative h-[100svh] max-h-[820px] flex flex-col justify-center px-5 sm:px-6 py-6 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -162,11 +162,11 @@ export default function NewsletterLanding() {
           </h1>
 
           <p className="text-sm sm:text-lg text-gray-200 leading-relaxed mb-5 sm:mb-6 max-w-xl mx-auto">
-            Twice a week, we read the portals, filings, briefings, and Arabic-language sources — so you
+            Twice a week, we read the portals, filings, briefings, and Arabic-language sources, so you
             receive only what matters. One email. Five minutes. No noise.
           </p>
 
-          <SubscribeForm buttonLabel="Subscribe — Free" formId="hero-subscribe" />
+          <SubscribeForm buttonLabel="Subscribe Free" formId="hero-subscribe" />
         </div>
       </section>
 
@@ -198,15 +198,15 @@ export default function NewsletterLanding() {
           <p>Each issue contains:</p>
           <ul className="list-disc pl-5 space-y-2">
             <li>
-              One lead story — the development, policy shift, or market movement that changes the
+              One lead story: the development, policy shift, or market movement that changes the
               landscape
             </li>
             <li>
-              Two supporting signals — regulatory updates, competitor moves, or data releases that
+              Two supporting signals: regulatory updates, competitor moves, or data releases that
               provide context
             </li>
             <li>
-              One practical note — a deadline, a contact, a form, or an event worth your attention
+              One practical note: a deadline, a contact, a form, or an event worth your attention
             </li>
           </ul>
           <p>No commentary for commentary&apos;s sake. No speculation. No noise.</p>
@@ -252,7 +252,7 @@ export default function NewsletterLanding() {
       {/* SAMPLE WORK */}
       <Section headline="See the Standard.">
         <div className="text-gray-400 text-sm sm:text-base leading-relaxed space-y-4">
-          <p className="text-white font-semibold">Issue #87 — June 2026</p>
+          <p className="text-white font-semibold">Issue #87 · June 2026</p>
           <ul className="list-disc pl-5 space-y-3">
             <li>
               Al Alyaa District, Knowledge Economic City: Construction at 70%, handover Q1 2027.
@@ -309,7 +309,7 @@ export default function NewsletterLanding() {
           Subscribe to The Kingdom Edit. Receive the briefing that keeps you current without keeping
           you busy.
         </p>
-        <SubscribeForm buttonLabel="Subscribe — Free, Twice Weekly" formId="footer-subscribe" />
+        <SubscribeForm buttonLabel="Subscribe Free, Twice Weekly" formId="footer-subscribe" />
       </Section>
 
       {/* FOOTER */}

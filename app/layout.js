@@ -6,8 +6,8 @@ const inter = Inter({ subsets: ['latin'] })
 const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 
 export const metadata = {
-  title: 'The Kingdom Edit — Saudi Arabia Intelligence Briefing',
-  description: 'Twice a week, we read the portals, filings, briefings, and Arabic-language sources — so you receive only what matters. One email. Five minutes. No noise.',
+  title: 'The Kingdom Edit: Saudi Arabia Intelligence Briefing',
+  description: 'Twice a week, we read the portals, filings, briefings, and Arabic-language sources, so you receive only what matters. One email. Five minutes. No noise.',
   keywords: 'The Kingdom Edit, Saudi Arabia newsletter, Vision 2030, Saudi opportunities, Kingdom Edit, Saudi Arabia digest, expat Saudi Arabia, invest Saudi Arabia, relocate Saudi Arabia',
   authors: [{ name: 'The Kingdom Edit' }],
   creator: 'The Kingdom Edit',
@@ -19,7 +19,7 @@ export const metadata = {
   openGraph: {
     type: 'website',
     url: 'https://thekingdomedit.com',
-    title: 'The Kingdom Edit — Saudi Arabia Intelligence Briefing',
+    title: 'The Kingdom Edit: Saudi Arabia Intelligence Briefing',
     description: 'Twice-weekly intelligence on Saudi Arabia. One email. Five minutes. No noise.',
     siteName: 'The Kingdom Edit',
     images: [
@@ -27,13 +27,13 @@ export const metadata = {
         url: '/hero-bg.jpg',
         width: 1200,
         height: 630,
-        alt: 'The Kingdom Edit — Saudi Arabia Newsletter',
+        alt: 'The Kingdom Edit: Saudi Arabia Newsletter',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'The Kingdom Edit — Saudi Arabia Intelligence Briefing',
+    title: 'The Kingdom Edit: Saudi Arabia Intelligence Briefing',
     description: 'Twice-weekly intelligence on Saudi Arabia. One email. Five minutes. No noise.',
     images: ['/hero-bg.jpg'],
   },
@@ -61,7 +61,7 @@ export default function RootLayout({ children }) {
               '@type': 'NewsMediaOrganization',
               name: 'The Kingdom Edit',
               url: 'https://thekingdomedit.com',
-              description: 'Twice-weekly newsletter covering Saudi Arabia\'s biggest opportunities — Vision 2030, real estate, careers, and business.',
+              description: 'Twice-weekly newsletter covering Saudi Arabia\'s biggest opportunities: Vision 2030, real estate, careers, and business.',
               foundingDate: '2025',
               email: 'info@thekingdomedit.com',
               sameAs: [

@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Issue #87 — The Kingdom Edit',
-  description: 'Sample issue of The Kingdom Edit — June 2026. Al Alyaa District, SDAIA Hexagon Data Centre, and Wafi registration deadline.',
+  title: 'Issue #87 | The Kingdom Edit',
+  description: 'Sample issue of The Kingdom Edit, June 2026. Al Alyaa District, SDAIA Hexagon Data Centre, and Wafi registration deadline.',
   robots: { index: true, follow: true },
 }
 
@@ -21,7 +21,7 @@ export default function SampleIssuePage() {
             Sample Issue
           </p>
           <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight">
-            Issue #87 — June 2026
+            Issue #87 · June 2026
           </h1>
         </div>
       </header>
@@ -72,7 +72,7 @@ export default function SampleIssuePage() {
               href="/#subscribe"
               className="inline-flex items-center justify-center min-h-[48px] px-6 py-3 bg-[#1A1208] text-[#FFFDF7] font-semibold rounded-lg hover:bg-[#2a2010] transition-colors"
             >
-              Subscribe — Free
+              Subscribe Free
             </Link>
           </div>
         </article>

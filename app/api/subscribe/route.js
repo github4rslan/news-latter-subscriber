@@ -155,11 +155,12 @@ export async function POST(request) {
           <td class="email-body" style="padding:36px 40px;background-color:#FFFDF7;">
 
             <p style="font-size:14px;color:#3D3530;line-height:1.8;margin:0 0 16px 0;">
-              Real estate. Careers. Business opportunities. Lifestyle. The moves
-              investors are making <strong>before everyone else catches on.</strong>
+              Real estate. Business setup. Investment structures. Visa pathways.
+              PIF and government tenders. The developments that matter
+              <strong>before everyone else catches on.</strong>
             </p>
             <p style="font-size:14px;color:#3D3530;line-height:1.8;margin:0 0 24px 0;">
-              No fluff. No politics. <strong>Just the signal.</strong>
+              One email. Five minutes. <strong>No noise.</strong>
             </p>
 
             <!-- What's coming timeline -->
@@ -182,20 +183,11 @@ export async function POST(request) {
                       </td>
                     </tr>
                     <tr>
-                      <td style="padding:8px 0;border-bottom:1px solid rgba(255,253,247,0.08);">
+                      <td style="padding:8px 0;">
                         <span style="font-size:12px;color:#C9A84C;font-weight:bold;">Every Friday</span>
                         &nbsp;&nbsp;
                         <span style="font-size:13px;color:rgba(255,253,247,0.8);">
                           The Kingdom Edit in your inbox at 8am GMT
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="padding:8px 0;">
-                        <span style="font-size:12px;color:#C9A84C;font-weight:bold;">Bonus</span>
-                        &nbsp;&nbsp;
-                        <span style="font-size:13px;color:rgba(255,253,247,0.8);">
-                          Your Saudi Opportunity Map delivered on signup 🇸🇦
                         </span>
                       </td>
                     </tr>
@@ -272,7 +264,6 @@ export async function POST(request) {
       'What\'s coming your way:',
       '- Every Tuesday: The Kingdom Edit at 8am GMT',
       '- Every Friday:  The Kingdom Edit at 8am GMT',
-      '- Bonus:         Your Saudi Opportunity Map delivered on signup',
       '',
       'WhatsApp alerts coming soon.',
       '',

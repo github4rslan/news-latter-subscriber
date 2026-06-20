@@ -1,181 +1,62 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
+import Link from 'next/link'
 import { CheckCircle } from 'lucide-react'
 
-const RECENT_SUBSCRIBERS = [
-  { name: 'Omar', location: 'Dubai, UAE' },
-  { name: 'Fatima', location: 'Riyadh, KSA' },
-  { name: 'Khalid', location: 'London, UK' },
-  { name: 'Aisha', location: 'Toronto, CA' },
-  { name: 'Yusuf', location: 'Jeddah, KSA' },
-  { name: 'Noor', location: 'Amsterdam, NL' },
-  { name: 'Ibrahim', location: 'New York, US' },
-  { name: 'Mariam', location: 'Singapore' },
-  { name: 'Abdullah', location: 'Riyadh, KSA' },
-  { name: 'Zainab', location: 'Manama, BH' },
-  { name: 'Tariq', location: 'Abu Dhabi, UAE' },
-  { name: 'Layla', location: 'Paris, FR' },
-  { name: 'Hassan', location: 'Kuwait City, KW' },
-  { name: 'Rania', location: 'Doha, QA' },
-  { name: 'Saad', location: 'Makkah, KSA' },
-  { name: 'Khadija', location: 'Amman, JO' },
-  { name: 'Faris', location: 'Sydney, AU' },
-  { name: 'Hafsa', location: 'Berlin, DE' },
-  { name: 'Walid', location: 'Madinah, KSA' },
-  { name: 'Samira', location: 'Cairo, EG' },
-  { name: 'Nawaf', location: 'Houston, US' },
-  { name: 'Ruqayyah', location: 'Stockholm, SE' },
-  { name: 'Majid', location: 'Dammam, KSA' },
-  { name: 'Sumayya', location: 'Kuala Lumpur, MY' },
-  { name: 'Hamad', location: 'Doha, QA' },
-  { name: 'Noura', location: 'Dubai, UAE' },
-  { name: 'Bilal', location: 'Kuwait City, KW' },
-  { name: 'Hessa', location: 'Abu Dhabi, UAE' },
-  { name: 'Sami', location: 'Jeddah, KSA' },
-  { name: 'Maryam', location: 'London, UK' },
-  { name: 'Jassim', location: 'Doha, QA' },
-  { name: 'Reem', location: 'Toronto, CA' },
-  { name: 'Turki', location: 'Riyadh, KSA' },
-  { name: 'Asma', location: 'Dubai, UAE' },
-  { name: 'Nasser', location: 'Sharjah, UAE' },
-  { name: 'Ghada', location: 'Amsterdam, NL' },
-  { name: 'Rashid', location: 'Dubai, UAE' },
-  { name: 'Iman', location: 'Manchester, UK' },
-  { name: 'Salman', location: 'Manama, BH' },
-  { name: 'Dalal', location: 'New York, US' },
-  { name: 'Faisal', location: 'Riyadh, KSA' },
-  { name: 'Haifa', location: 'Paris, FR' },
-  { name: 'Yousef', location: 'Muscat, OM' },
-  { name: 'Wafa', location: 'Dubai, UAE' },
-  { name: 'Meshal', location: 'Kuwait City, KW' },
-  { name: 'Arwa', location: 'Melbourne, AU' },
-  { name: 'Ziad', location: 'Beirut, LB' },
-  { name: 'Manal', location: 'Singapore' },
-  { name: 'Sultan', location: 'Abu Dhabi, UAE' },
-  { name: 'Hind', location: 'London, UK' },
+const SAMPLE_ISSUE_URL = process.env.NEXT_PUBLIC_SAMPLE_ISSUE_URL || '/sample'
+
+const FAQ_ITEMS = [
+  {
+    q: 'Is The Kingdom Edit free?',
+    a: 'Yes. The core newsletter is free.',
+  },
+  {
+    q: 'How often is it published?',
+    a: 'Every Tuesday and Friday, at 8am GMT.',
+  },
+  {
+    q: 'What topics do you cover?',
+    a: 'Real estate, business setup and licensing, investment structures, visa and residency pathways, PIF and government tenders, technology and AI developments, and more.',
+  },
+  {
+    q: 'Is this relevant to non-Muslim readers?',
+    a: 'Yes. Saudi Arabia\'s economic transformation is governed by commercial and regulatory frameworks open to all nationalities and faiths. We cover opportunity and process, not religious context.',
+  },
+  {
+    q: 'How do I unsubscribe?',
+    a: 'One click, at the bottom of every email. No follow-up required.',
+  },
 ]
 
-function shuffle(arr) {
-  const a = [...arr]
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]]
-  }
-  return a
-}
+function trackConversion() {
+  if (typeof window === 'undefined') return
 
-function SubscriberToast() {
-  const [visible, setVisible] = useState(false)
-  const [current, setCurrent] = useState(0)
-  const shuffled = useRef(shuffle(RECENT_SUBSCRIBERS))
-
-  useEffect(() => {
-    // First toast after 4 seconds
-    const initial = setTimeout(() => showToast(), 4000)
-    return () => clearTimeout(initial)
-  }, [])
-
-  function showToast() {
-    setVisible(true)
-    setTimeout(() => {
-      setVisible(false)
-      setTimeout(() => {
-        setCurrent(i => {
-          const next = i + 1
-          if (next >= shuffled.current.length) {
-            shuffled.current = shuffle(RECENT_SUBSCRIBERS)
-            return 0
-          }
-          return next
-        })
-        const delay = 10000 + Math.random() * 5000
-        setTimeout(() => showToast(), delay)
-      }, 400)
-    }, 8000)
+  if (window.gtag) {
+    window.gtag('event', 'newsletter_subscribe', {
+      event_category: 'conversion',
+      event_label: 'landing_page',
+    })
   }
 
-  const sub = shuffled.current[current]
-
-  return (
-    <div
-      className="fixed bottom-6 left-4 sm:left-6 z-50"
-      style={{
-        transform: visible ? 'translateY(0)' : 'translateY(130%)',
-        opacity: visible ? 1 : 0,
-        transition: 'transform 0.5s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease',
-      }}
-    >
-      <div className="flex items-center gap-3 bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl px-4 py-3 shadow-2xl max-w-[280px]">
-        {/* Avatar */}
-        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center flex-shrink-0 shadow-lg">
-          <span className="text-black font-bold text-sm">{sub.name.charAt(0)}</span>
-        </div>
-        {/* Text */}
-        <div className="min-w-0">
-          <div className="flex items-center gap-1.5 mb-0.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
-            <p className="text-white/50 text-[10px] uppercase tracking-widest font-medium">New subscriber</p>
-          </div>
-          <p className="text-white text-sm font-semibold leading-tight">
-            Welcome, {sub.name}! 🎉
-          </p>
-          <p className="text-gray-400 text-xs mt-0.5">{sub.location} · joined today</p>
-        </div>
-      </div>
-    </div>
-  )
+  if (window.dataLayer) {
+    window.dataLayer.push({
+      event: 'newsletter_subscribe',
+      event_category: 'conversion',
+    })
+  }
 }
 
-function useCountUp(target, duration = 1200) {
-  const [display, setDisplay] = useState(target)
-  const prev = useRef(target)
-
-  useEffect(() => {
-    if (prev.current === target) return
-    const start = prev.current
-    const diff = target - start
-    const startTime = performance.now()
-
-    const tick = (now) => {
-      const elapsed = now - startTime
-      const progress = Math.min(elapsed / duration, 1)
-      const eased = 1 - Math.pow(1 - progress, 3)
-      setDisplay(Math.round(start + diff * eased))
-      if (progress < 1) requestAnimationFrame(tick)
-      else prev.current = target
-    }
-
-    requestAnimationFrame(tick)
-  }, [target, duration])
-
-  return display
-}
-
-
-export default function NewsletterLanding() {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: ''
-  })
+function SubscribeForm({ buttonLabel, formId = 'subscribe-form' }) {
+  const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
-  const [subscriberCount, setSubscriberCount] = useState(null)
-  const animatedCount = useCountUp(subscriberCount ?? 0)
-
-  useEffect(() => {
-    fetch('/api/subscriber-count')
-      .then(r => r.json())
-      .then(d => setSubscriberCount(d.count))
-      .catch(() => setSubscriberCount(2847))
-  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!formData.email || !formData.email.includes('@')) {
+    if (!email || !email.includes('@')) {
       setError('Please enter a valid email address')
       return
     }
@@ -187,7 +68,7 @@ export default function NewsletterLanding() {
       const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ email }),
       })
 
       const data = await response.json()
@@ -196,9 +77,9 @@ export default function NewsletterLanding() {
         throw new Error(data.error || 'Failed to subscribe')
       }
 
+      trackConversion()
       setSuccess(true)
-      setSubscriberCount(c => (c ?? 2847) + 1)
-      setFormData({ firstName: '', lastName: '', email: '' })
+      setEmail('')
 
       setTimeout(() => setSuccess(false), 5000)
     } catch (err) {
@@ -208,151 +89,243 @@ export default function NewsletterLanding() {
     }
   }
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
-
   return (
-    <div className="min-h-screen flex flex-col">
-      <SubscriberToast />
-      {/* HERO SECTION */}
-      <section className="relative min-h-[100svh] flex items-center justify-center px-5 sm:px-6 py-8 sm:py-12">
-        {/* Background Image */}
+    <form id={formId} onSubmit={handleSubmit} className="w-full max-w-md mx-auto">
+      {success && (
+        <div className="mb-4 bg-green-500/20 border border-green-400/40 rounded-lg p-4 backdrop-blur-sm">
+          <div className="flex items-center justify-center gap-3">
+            <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+            <div className="text-left">
+              <p className="text-green-200 font-semibold text-sm">Successfully subscribed!</p>
+              <p className="text-green-300/80 text-xs">Check your email for confirmation.</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {error && (
+        <div className="mb-4 bg-red-500/20 border border-red-400/40 rounded-lg p-3 backdrop-blur-sm">
+          <p className="text-red-200 text-sm text-center">{error}</p>
+        </div>
+      )}
+
+      <input
+        type="email"
+        name="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="your@email.com"
+        disabled={loading}
+        autoComplete="email"
+        inputMode="email"
+        className="w-full px-5 py-3.5 sm:py-4 bg-white/10 border-2 border-white/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-white/70 focus:bg-white/15 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-center backdrop-blur-sm text-base min-h-[48px]"
+        style={{ fontSize: '16px' }}
+        required
+      />
+
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full mt-3 py-3.5 sm:py-4 px-8 bg-white hover:bg-gray-100 text-black font-bold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-base min-h-[48px]"
+      >
+        {loading ? 'Subscribing...' : buttonLabel}
+      </button>
+    </form>
+  )
+}
+
+function Section({ id, headline, children, className = '' }) {
+  return (
+    <section id={id} className={`px-5 sm:px-6 py-14 sm:py-16 border-t border-white/5 ${className}`}>
+      <div className="max-w-2xl mx-auto">
+        <h2 className="text-xl sm:text-2xl font-bold text-white mb-5 sm:mb-6">{headline}</h2>
+        {children}
+      </div>
+    </section>
+  )
+}
+
+export default function NewsletterLanding() {
+  return (
+    <div className="min-h-screen flex flex-col bg-black">
+      {/* HERO — headline + CTA visible above the fold */}
+      <section className="relative h-[100svh] max-h-[820px] flex flex-col justify-center px-5 sm:px-6 py-6 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/hero-bg.jpg')" }}
         />
-        {/* Dark Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/65 to-black/85" />
 
-        {/* Content */}
-        <div className="relative z-10 max-w-2xl w-full text-center">
-          <h1 className="text-[2rem] sm:text-4xl md:text-6xl font-bold text-white mb-3 sm:mb-5 leading-tight tracking-tight">
-            The Saudi Entry Strategy
+        <div className="relative z-10 max-w-2xl w-full mx-auto text-center">
+          <h1 className="text-[1.625rem] sm:text-4xl md:text-[2.75rem] font-bold text-white mb-3 sm:mb-4 leading-[1.15] tracking-tight">
+            The World&apos;s Attention Is Shifting. Saudi Arabia Is Where It&apos;s Landing.
           </h1>
 
-          <p className="text-sm sm:text-lg md:text-xl text-gray-200 leading-relaxed mb-6 sm:mb-8 max-w-xl mx-auto px-0">
-            Vision 2030 is rewriting the rules. $3 trillion in projects. New cities rising. Visa gates opening. Every Tuesday and Friday, get the opportunities worth acting on. Distilled to 5 minutes, zero noise.
+          <p className="text-sm sm:text-lg text-gray-200 leading-relaxed mb-5 sm:mb-6 max-w-xl mx-auto">
+            Twice a week, we read the portals, filings, briefings, and Arabic-language sources — so you
+            receive only what matters. One email. Five minutes. No noise.
           </p>
 
-          {/* Success Message */}
-          {success && (
-            <div className="mb-6 bg-green-500/20 border border-green-400/40 rounded-lg p-4 backdrop-blur-sm">
-              <div className="flex items-center justify-center gap-3">
-                <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
-                <div>
-                  <p className="text-green-200 font-semibold text-sm">Successfully subscribed!</p>
-                  <p className="text-green-300/80 text-xs">Check your email for confirmation.</p>
-                </div>
-              </div>
-            </div>
-          )}
+          <SubscribeForm buttonLabel="Subscribe — Free" formId="hero-subscribe" />
+        </div>
+      </section>
 
-          {/* Error Message */}
-          {error && (
-            <div className="mb-6 bg-red-500/20 border border-red-400/40 rounded-lg p-4 backdrop-blur-sm">
-              <p className="text-red-200 text-sm">{error}</p>
-            </div>
-          )}
+      {/* WHY THIS EXISTS */}
+      <Section headline="The Opportunity Is Here. The Information Is Scattered.">
+        <div className="text-gray-400 text-sm sm:text-base leading-relaxed space-y-4">
+          <p>
+            Vision 2030 has set a $3 trillion economy in motion. New cities. New visas. New investment
+            structures. New regulatory frameworks.
+          </p>
+          <p>The information exists. But it lives across:</p>
+          <ul className="list-disc pl-5 space-y-2">
+            <li>Government portals in Arabic and English, often with conflicting translations</li>
+            <li>Regulatory filings with no plain-language summary</li>
+            <li>Private investor briefings most people never see</li>
+            <li>News coverage that reports announcements without context</li>
+          </ul>
+          <p>
+            The Kingdom Edit collects, verifies, and distills.
+            <br />
+            We do the reading. You make the decisions.
+          </p>
+        </div>
+      </Section>
 
-          {/* Email Input */}
-          <div className="max-w-md mx-auto mb-3">
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              onKeyDown={e => e.key === 'Enter' && handleSubmit(e)}
-              placeholder="your@email.com"
-              disabled={loading}
-              className="w-full px-6 py-4 bg-white/10 border-2 border-white/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-white/70 focus:bg-white/15 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-center backdrop-blur-sm text-base sm:text-lg"
-              style={{ fontSize: '16px' }}
-              required
-            />
-          </div>
+      {/* WHAT YOU RECEIVE */}
+      <Section headline="Tuesday and Friday. 8am GMT.">
+        <div className="text-gray-400 text-sm sm:text-base leading-relaxed space-y-4">
+          <p>Each issue contains:</p>
+          <ul className="list-disc pl-5 space-y-2">
+            <li>
+              One lead story — the development, policy shift, or market movement that changes the
+              landscape
+            </li>
+            <li>
+              Two supporting signals — regulatory updates, competitor moves, or data releases that
+              provide context
+            </li>
+            <li>
+              One practical note — a deadline, a contact, a form, or an event worth your attention
+            </li>
+          </ul>
+          <p>No commentary for commentary&apos;s sake. No speculation. No noise.</p>
+        </div>
+      </Section>
 
-          {/* CTA Button */}
-          <button
-            onClick={handleSubmit}
-            disabled={loading}
-            className="w-full max-w-md mx-auto block py-4 px-8 bg-white hover:bg-gray-100 text-black font-bold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed mb-4 sm:mb-6 text-base sm:text-lg cta-pulse min-h-[48px]"
+      {/* WHO READS THIS */}
+      <Section headline="Built for People Making Real Decisions.">
+        <div className="text-gray-400 text-sm sm:text-base leading-relaxed space-y-4">
+          <ul className="list-disc pl-5 space-y-2">
+            <li>
+              Investors tracking pre-construction cycles, PIF co-investment structures, and sector
+              openings
+            </li>
+            <li>
+              Entrepreneurs navigating licensing, local partnerships, and tender opportunities
+            </li>
+            <li>
+              Professionals evaluating relocation, visa pathways, and career transitions
+            </li>
+            <li>
+              Advisors who need credible, current intelligence for client conversations
+            </li>
+          </ul>
+          <p>
+            Read by individuals and teams across London, Dubai, New York, Riyadh, and Singapore.
+          </p>
+        </div>
+      </Section>
+
+      {/* A NOTE ON APPROACH */}
+      <Section headline="We Report What Is. You Decide What to Do With It.">
+        <div className="text-gray-400 text-sm sm:text-base leading-relaxed space-y-4">
+          <p>
+            The Kingdom Edit is a filter. We track primary sources. We verify claims. We note where
+            official statements diverge from ground-level reality. We flag opportunities early and point
+            out where caution is warranted.
+          </p>
+          <p className="text-white font-medium">Our only bias is clarity.</p>
+        </div>
+      </Section>
+
+      {/* SAMPLE WORK */}
+      <Section headline="See the Standard.">
+        <div className="text-gray-400 text-sm sm:text-base leading-relaxed space-y-4">
+          <p className="text-white font-semibold">Issue #87 — June 2026</p>
+          <ul className="list-disc pl-5 space-y-3">
+            <li>
+              Al Alyaa District, Knowledge Economic City: Construction at 70%, handover Q1 2027.
+              Updated payment structure for non-Saudi buyers. What changed, and what to confirm
+              before signing.
+            </li>
+            <li>
+              SDAIA Hexagon Data Centre: 480MW capacity, EPC contract awarded. Implications for AI
+              infrastructure entrants.
+            </li>
+            <li>
+              Practical note: Wafi registration deadline this month. Direct link and required
+              documentation.
+            </li>
+          </ul>
+          <Link
+            href={SAMPLE_ISSUE_URL}
+            className="inline-flex items-center justify-center min-h-[48px] mt-2 px-6 py-3 border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
           >
-            {loading ? (
-              <span className="flex items-center justify-center gap-2">
-                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                </svg>
-                Joining...
-              </span>
-            ) : (
-              'Get My First Edit'
-            )}
-          </button>
+            Read a Recent Issue
+          </Link>
+        </div>
+      </Section>
 
-          {/* Social Proof */}
-          <p className="text-gray-300 text-xs sm:text-sm text-center">
-            <span className="text-white font-semibold">
-              {subscriberCount === null ? '...' : animatedCount.toLocaleString()}
-            </span>
-            {' '}professionals already inside. Drops every Tuesday & Friday.
+      {/* ABOUT */}
+      <Section headline="Curated by People Inside the Market.">
+        <div className="text-gray-400 text-sm sm:text-base leading-relaxed space-y-4">
+          <p>
+            The Kingdom Edit is produced by a team with direct experience in Saudi real estate
+            transactions, cross-border infrastructure, and regulatory navigation. It began as a private
+            briefing shared with executives entering the Kingdom. Demand grew. The briefing opened.
+          </p>
+          <p>
+            We write for readers who know the difference between an announcement and an opportunity.
           </p>
         </div>
-      </section>
+      </Section>
 
-
-      {/* SEO CONTENT SECTION */}
-      <section className="bg-black px-4 sm:px-6 py-16 border-t border-white/5">
-        <div className="max-w-2xl mx-auto">
-
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">About The Kingdom Edit</h2>
-          <p className="text-gray-400 text-sm leading-relaxed mb-8">
-            The Kingdom Edit is a twice-weekly newsletter dedicated to Saudi Arabia's transformation under Vision 2030. We cover the opportunities that matter — real estate, careers, business, investment, and lifestyle — distilled into a 5-minute read every Tuesday and Friday. Whether you're a professional considering relocating to Saudi Arabia, an expat already living in the Kingdom, or an investor watching the region's growth, The Kingdom Edit keeps you informed and ahead.
-          </p>
-
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">Frequently Asked Questions</h2>
-          <div className="space-y-6">
-            {[
-              {
-                q: 'What is The Kingdom Edit?',
-                a: 'The Kingdom Edit is a free twice-weekly newsletter covering Saudi Arabia\'s biggest opportunities across real estate, careers, business, and Vision 2030 developments. It is published every Tuesday and Friday.'
-              },
-              {
-                q: 'Who is The Kingdom Edit for?',
-                a: 'The Kingdom Edit is for Muslim professionals, investors, entrepreneurs, and relocators who want to stay informed about opportunities in Saudi Arabia. Our readers span the UAE, UK, US, Canada, and across the Muslim world.'
-              },
-              {
-                q: 'How often is The Kingdom Edit published?',
-                a: 'The Kingdom Edit is published twice a week — every Tuesday and Friday at 8am GMT.'
-              },
-              {
-                q: 'Is The Kingdom Edit free?',
-                a: 'Yes, The Kingdom Edit is completely free to subscribe. Founding members also receive a free Personalized Saudi Opportunity Map on signup.'
-              },
-              {
-                q: 'What topics does The Kingdom Edit cover?',
-                a: 'The Kingdom Edit covers Saudi Arabia\'s Vision 2030 projects, real estate market updates, job and career opportunities, business setup, investment trends, visa and residency news, and lifestyle developments in the Kingdom.'
-              },
-            ].map(({ q, a }) => (
-              <div key={q} className="border-b border-white/10 pb-6">
-                <h3 className="text-white font-semibold text-sm mb-2">{q}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{a}</p>
-              </div>
-            ))}
-          </div>
-
+      {/* FAQ */}
+      <Section headline="Frequently Asked Questions">
+        <div className="space-y-6">
+          {FAQ_ITEMS.map(({ q, a }) => (
+            <div key={q} className="border-b border-white/10 pb-6 last:border-0 last:pb-0">
+              <h3 className="text-white font-semibold text-sm sm:text-base mb-2">{q}</h3>
+              <p className="text-gray-400 text-sm sm:text-base leading-relaxed">{a}</p>
+            </div>
+          ))}
         </div>
-      </section>
+      </Section>
+
+      {/* FINAL CTA */}
+      <Section id="subscribe" headline="Stay Informed. Stay Ahead." className="bg-black">
+        <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-6">
+          Subscribe to The Kingdom Edit. Receive the briefing that keeps you current without keeping
+          you busy.
+        </p>
+        <SubscribeForm buttonLabel="Subscribe — Free, Twice Weekly" formId="footer-subscribe" />
+      </Section>
 
       {/* FOOTER */}
-      <footer className="bg-black px-4 py-6 border-t border-white/5">
+      <footer className="bg-black px-5 py-6 border-t border-white/5">
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-gray-600 text-xs">
-            © {new Date().getFullYear()} The Kingdom Edit · <a href="mailto:info@thekingdomedit.com" className="hover:text-gray-400 transition-colors">info@thekingdomedit.com</a>
+            © {new Date().getFullYear()} The Kingdom Edit ·{' '}
+            <a
+              href="mailto:info@thekingdomedit.com"
+              className="hover:text-gray-400 transition-colors"
+            >
+              info@thekingdomedit.com
+            </a>
           </p>
         </div>
       </footer>
-
     </div>
   )
 }

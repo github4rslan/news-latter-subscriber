@@ -6,5 +6,11 @@ export default function sitemap() {
       changeFrequency: 'weekly',
       priority: 1,
     },
+    {
+      url: 'https://thekingdomedit.com/sample',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
   ]
 }

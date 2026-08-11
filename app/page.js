@@ -149,7 +149,7 @@ export default function NewsletterLanding() {
   return (
     <div className="min-h-screen flex flex-col bg-black">
       {/* HERO - headline + CTA visible above the fold */}
-      <section className="relative h-[100svh] max-h-[820px] flex flex-col justify-center px-5 sm:px-6 py-6 overflow-hidden">
+      <section className="relative h-[100svh] max-h-[820px] flex flex-col justify-start pt-[13svh] pb-6 px-5 sm:px-6 sm:justify-center sm:py-6 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/hero-bg.jpg')" }}
@@ -157,7 +157,7 @@ export default function NewsletterLanding() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/65 to-black/85" />
 
         <div className="relative z-10 max-w-2xl w-full mx-auto text-center">
-          <h1 className="text-[1.625rem] sm:text-4xl md:text-[2.75rem] font-bold text-white mb-3 sm:mb-4 leading-[1.15] tracking-tight">
+          <h1 className="text-[1.875rem] sm:text-4xl md:text-[2.75rem] font-bold text-white mb-3 sm:mb-4 leading-[1.15] tracking-tight">
             The World&apos;s Attention Is Shifting. Saudi Arabia Is Where It&apos;s Landing.
           </h1>
 
